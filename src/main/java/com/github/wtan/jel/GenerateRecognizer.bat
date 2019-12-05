@@ -1,0 +1,1 @@
+java -cp C:\tools\antlr-2.7.3\* antlr.Tool statement.g

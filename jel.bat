@@ -1,0 +1,1 @@
+java -cp .\target\jel-1.0.jar;.\lib\* com.github.wtan.jel.JELConsole %1 %2 %3

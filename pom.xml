@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.wtan</groupId>
+	<artifactId>jel</artifactId>
+	<version>1.0</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang - for ConstantValue, New & StringUtils -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+ 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<!-- <executable>${JAVA_1_8_HOME}/bin/javac</executable> -->
+					<compilerVersion>1.8</compilerVersion>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<!-- <createDependencyReducedPom>false</createDependencyReducedPom> -->
+							<minimizeJar>false</minimizeJar>
+							<artifactSet>
+								<includes>
+									<include>antlr:antlr:*</include>
+									<include>commons-lang:commons-lang:*</include>
+								</includes>
+							</artifactSet>
+							<filters>
+								<filter>
+									<artifact>commons-lang:commons-lang</artifact>
+									<excludes>
+										<exclude>org/apache/commons/lang/builder/**</exclude>
+										<exclude>org/apache/commons/lang/enum/**</exclude>
+										<exclude>org/apache/commons/lang/enums/**</exclude>
+										<exclude>org/apache/commons/lang/math/**</exclude>
+										<exclude>org/apache/commons/lang/mutable/**</exclude>
+									</excludes>
+								</filter>
+							</filters>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
