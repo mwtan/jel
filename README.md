@@ -33,7 +33,6 @@ Statement Syntax
 ----------------
 JEL statements follow the basic rules of the Java language but with some limitations (see
 Limitations below).
-
 An expression can be given precedence using parentheses (i.e. ( and ) characters),
 e.g. ```4 * (3 + 5);```
  
@@ -87,7 +86,7 @@ and returns null.
 Comments
 --------
 Comments can be embedded in the statements. They can be single lined
-(using a //) or multi-lined (using /* and */). A // comment must be
+(using a ```//```) or multi-lined (using ```/*``` and ```*/```). A ```//``` comment must be
 terminated with a new-line character, otherwise subsequent lines may be ignored
 causing errors.
  
@@ -108,10 +107,8 @@ All the Java relational operators can be used:
 
 Arithmetic Operators
 --------------------
-Most the usual arithmetic operators are available. Postfix increment and
-decrement operators are not available. The arithmetic operators also follow the
-Java precedence rules, e.g. multiplication and division happen before addition
-and subtraction.
+Most the usual arithmetic operators are available. The arithmetic operators also follow the
+Java precedence rules, e.g. multiplication and division happen before addition and subtraction.
 - addition (```+```)
 - subtraction (```-```)
 - division (```/```)
@@ -130,7 +127,7 @@ of that name is retrieved from the map. An invalid name or the absence of a
 map entry produces a null. The test ```(object == null)``` or
 ```(object != null)``` can be used.
 
-Public object fields can be referenced using the DOT (.) operator, e.g.
+Public object fields can be referenced using the DOT (```.```) operator, e.g.
 ```object.status```. Also, public object methods can be called, e.g.
 with an object named ```lastName``` of type String, the String methods
 can be called in the normal way, such as ```lastName.length()``` or
@@ -151,7 +148,7 @@ Since the String class is in the java.lang package, it can be used directly.
 ```
     { num = 42; return String.valueOf(num); }
 ```
-Here, a class in the Apache Commons library (present in the classpath) is used:
+Here, a class in the Apache Commons library (and present in the classpath) is used:
 ```
     return org.apache.commons.lang.StringEscapeUtils.unescapeJava("Hello\tWorld."); 
 ```
@@ -175,7 +172,8 @@ As before the java.lang or java.util package can be omitted:
 ```
     obj = new ArrayList(7); 
 ```
-Parameters to class constructors can be supplied:```
+Parameters to class constructors can be supplied:
+```
     obj = new StringBuilder("Hello");
 ```
 
