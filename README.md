@@ -1,12 +1,11 @@
 # Java Expression Language
-========================
 
 JEL provides the ability to define Java expressions in text form that is parsed at runtime
 for execution. These expressions can be stored in a properties file, database or an XML
 file to enable modification without requiring a code change. At run-time these expressions 
-are retrieved and '''Statement''' objects are created using the '''parse''' 
+are retrieved and <code>Statement</code> objects are created using the <code>parse</code> 
 method. Once created, these objects are evaluated in sequence (by calling its 
-'''eval(Map)''' method). The Map passed to the '''Statement''' object 
+<code>eval(Map)</code> method). The Map passed to the <code>Statement</code> object 
 contains attribute or variables required in the evaluation. The evaluation can return 
 an object including a Boolean true or false result.
 
@@ -20,15 +19,15 @@ Key features
 Usage in Java
 -------------
 A Statement object is first created by parsing an expression string:
-'''
+```
 Statement stmt = Statement.parse("message = \"hello world\";");
-'''
+```
 The statement is then evaluated with a supplied Map which holds expression variables
 and can be used in multiple statement evaluations:
-'''
+```
 Map m = new HashMap();
 Object result = stmt.eval(m);
- '''
+ ```
  
 Statement Syntax
 ----------------
@@ -36,20 +35,20 @@ JEL statements follow the basic rules of the Java language but with some limitat
 Limitations below).
 
 An expression can be given precedence using parentheses (i.e. ( and ) characters),
-e.g. '''4 * (3 + 5);'''
+e.g. ```4 * (3 + 5);```
  
 Compound Statements
 Statements can be compound statements with each statement terminated with a semi-colon.
 Unlike single statements, compound statements must be enclosed by curly braces. e.g.
-'''
+```
     {
         message = "Hello";
         volts = current * resistance;
     }
-'''
+```
 
 Of course, compound statements can include "if" and "return" statements: e.g.
-'''
+```
     {
         if (myobj != null && myobj.rc == 42) {
             message = "hello";
@@ -59,29 +58,29 @@ Of course, compound statements can include "if" and "return" statements: e.g.
         }
         return true;
     }
-'''
+```
  
 Return
 ------
-The '''return''' statement returns an object for the Statement being evaluated.
-It can be a '''true''' or '''false''' Boolean object or a String or the result
+The ```return``` statement returns an object for the Statement being evaluated.
+It can be a ```true``` or ```false``` Boolean object or a String or the result
 of a method call. However, only objects are returned. Primitive values that result
 from arithmetic expressions or method calls are returned in their primitive wrappers.
 
 A Statement object does not have to return a value, e.g. it could contain only
-assignment statements. Without a '''return''' statement, a Statement evaluation
+assignment statements. Without a ```return``` statement, a Statement evaluation
 returns null.
 
-A '''return''' statement within a compound statement exits the Statement.
+A ```return``` statement within a compound statement exits the Statement.
 Any remaining statements are not executed. e.g.
-'''
+```
     {
         distance = speed * time;
         return "Distance=" + distance;
         volts = current * resistance; // Doesn't get executed.
     } </pre>
-'''
- A '''return''' statement without an expression simply exits the statement
+```
+ A ```return``` statement without an expression simply exits the statement
  and returns null.
  
 Comments
@@ -376,9 +375,9 @@ Testing and experimentation
 The JELConsole application can be used to try out JEL statements. It has a command line interface
 to run expressions, allowing previous commands to be recalled and modified. The show command displays 
 the contents of the work map. Type help at the prompt for help. Run it as follows:
-'''
+```
 java -cp .\jel-1.0.jar;.\*; com.github.wtan.jel.JELConsole
-'''
+```
 
 Limitations
 -----------
