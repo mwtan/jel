@@ -177,9 +177,9 @@ Parameters to class constructors can be supplied:
     obj = new StringBuilder("Hello");
 ```
 
-<b>Sting Concatenation</b><br>
+<b>String Concatenation</b><br>
 The arithmetic ```+``` operator is overloaded to concatenate Strings. A string or
-string literal can be concatenated with other strings or a primitive types. The
+string literal can be concatenated with other strings or primitive types. The
 ```+=``` operator can also be used. Examples:
 ```
     {
@@ -191,7 +191,7 @@ string literal can be concatenated with other strings or a primitive types. The
 
 Escaping special characters
 ---------------------------
-When special characters need to be included within string, they need to be escaped 
+When special characters need to be included within strings, they need to be escaped 
 in the normal way, e.g.
 ```
     message = "This is line one\nThis is line two\n\tThis line is tabbed.\";
@@ -272,7 +272,7 @@ characters) can be used to delineate code blocks or compound statements.
 while loop
 ----------
 This is a standard while loop where a boolean condition is evaluate and the statement 
-block is run zero of more times.  The statement block can contain break, continue or 
+block is run zero or more times.  The statement block can contain break, continue or 
 return statements. A break or continue to a label is not permitted.  E.g.
 ```
     {
