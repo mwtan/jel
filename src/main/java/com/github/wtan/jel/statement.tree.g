@@ -141,8 +141,14 @@ expression returns [Expression r=null]
     ;
 
 expr returns [Expression r = null]
-    { Expression a = null, b = null; }
-    :   #(ASSIGN a = expr b = expr) {
+    { Expression a = null, b = null, c = null; }
+    :   #(QUESTION a = expr b = expr c = expr) {
+            if (a==null || b==null || c==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new Ternary(a, b, c);
+        }
+    |   #(ASSIGN a = expr b = expr) {
             if (a==null || b==null) {
                 throw new RecognitionException(EXCEPTION_MSG);
             }
@@ -362,7 +368,7 @@ newExpression returns [Expression r = null]
  */
 constant returns [Expression r=null]
     :   i:NUM_INT {
-            r = new ConstantValue(new Integer(i.getText()));
+            r = new ConstantValue(new Integer(Integer.decode(i.getText())));
         }
     |   j:CHAR_LITERAL {
             String s = j.getText();

@@ -216,6 +216,7 @@ assignmentExpression
 // conditional test (level 12)
 conditionalExpression
     :   logicalOrExpression
+		( QUESTION^ assignmentExpression COLON! conditionalExpression )?
     ;
 
 
@@ -382,6 +383,7 @@ options {
 
 
 // OPERATORS
+QUESTION		:	'?'		;
 LPAREN          :   '('     ;
 RPAREN          :   ')'     ;
 LCURLY          :   '{'     ;
