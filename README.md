@@ -255,6 +255,15 @@ specified type, e.g.
 Since type checking does not exist during compile time, it may be necessary to 
 validate an object type before accessing object attributes or making method calls.
 
+? operator
+------------------
+The ternary ? operator evaluates two supplied expressions depending on the result of
+the evaluated condition, e.g.
+```
+    canvote = (age >= 18) ? \"Yes, you can vote!\" : \"No, you can't vote!\";
+```
+The example results in a canvote value of "No, you can't vote!" if age is less than 18.
+
 if statement
 ------------
 An ```if``` statement begins with the ```if``` keyword followed by a
@@ -416,7 +425,6 @@ Limitations
 - No variable declaration (not needed since new variables are created automatically)
 - No arrays
 - No bitwise or shift operators
-- No ternary operator *?*
 - No break or continue to a named label within while, do, and for loops. Normal break and continue statements in loops and conditional statements are allowed.</li>
 - No synchronize
 - No throwing or catching exceptions
