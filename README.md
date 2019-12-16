@@ -275,6 +275,25 @@ Long types. Byte, Character and Short are up cast to Integer. e.g.
     i = 5 ^ 6;   // result is 3
     i = ~6;      // result is -7
 ```
+Bitwise shift operators <<, >> and >>> also exist. The shift multiple is an integer:
+```
+    i = 12 << 2;   // result is 48
+    i = -12 << 2;  // result is -48
+    i = 12 >> 2;   // result is 3
+    i = -12 >> 2;  // result is -3
+    i = 12 >>> 2;  // result is 3
+    i = -12 >>> 2; // result is 1073741821
+```
+
+For all bitwise operators and shift operators, their assignment operators also exist:
+```
+    i &= 6;   // if i starts with a value of 5, the resulting value of i is 4
+    i |= 6;   // if i starts with a value of 5, the resulting value of i is 7
+    i ^= 6;   // if i starts with a value of 5, the resulting value of i is 3
+    i <<= 2;  // if i starts with a value of 12, the resulting value of i is 48
+    i >>= 2;  // if i starts with a value of 12, the resulting value of i is 3
+    i >>>= 2; // if i starts with a value of 12, the resulting value of i is 3
+```
 
 if statement
 ------------
@@ -436,7 +455,6 @@ Limitations
 - No casting
 - No variable declaration (not needed since new variables are created automatically)
 - No arrays
-- No bitwise shift operators
 - No break or continue to a named label within while, do, and for loops. Normal break and continue statements in loops and conditional statements are allowed.</li>
 - No synchronize
 - No throwing or catching exceptions
