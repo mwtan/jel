@@ -41,6 +41,7 @@ abstract class BinaryBitwiseAssignExpression extends BinaryBitwiseExpression {
 				return rvalue;
 			}
 		}
-		return null;
+		throw new ExpressionException("Left expression not an IdentValue." + 
+				((expr1 != null) ? expr1.getClass() : null));
 	}
 }

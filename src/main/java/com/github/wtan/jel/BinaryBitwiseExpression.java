@@ -5,7 +5,7 @@ import java.util.Map;
 import com.github.wtan.jel.exception.ExpressionException;
 
 /**
- * Base class for binary arithmetic expressions.
+ * Base class for binary bitwise expressions.
  *
  * @author Will Tan
  */

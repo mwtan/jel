@@ -28,7 +28,7 @@ class New extends MultiExpression {
 	}
 
 	@Override
-	public Object eval(Map m) throws ExpressionException {
+	public Object eval(Map<?, ?> m) throws ExpressionException {
 		String classname = null;
 		if (expr1 instanceof Dot) {
 			Object obj = ((Dot)expr1).getPackageClassName(m);

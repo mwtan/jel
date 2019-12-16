@@ -188,19 +188,19 @@ expr returns [Expression r = null]
             if (a==null || b==null) {
                 throw new RecognitionException(EXCEPTION_MSG);
             }
-            r = new DivideAssign(a, b);
+            r = new BitwiseRightShiftAssign(a, b);
         }
     |   #(BSR_ASSIGN a = expr b = expr) {
             if (a==null || b==null) {
                 throw new RecognitionException(EXCEPTION_MSG);
             }
-            r = new DivideAssign(a, b);
+            r = new BitwiseUnsignedRightShiftAssign(a, b);
         }
     |   #(SL_ASSIGN a = expr b = expr) {
             if (a==null || b==null) {
                 throw new RecognitionException(EXCEPTION_MSG);
             }
-            r = new DivideAssign(a, b);
+            r = new BitwiseLeftShiftAssign(a, b);
         }
     |   #(BAND_ASSIGN a = expr b = expr) {
             if (a==null || b==null) {
@@ -285,6 +285,24 @@ expr returns [Expression r = null]
                 throw new RecognitionException(EXCEPTION_MSG);
             }
             r = new GreaterThanEqual(a, b);
+        }
+    |   #(SL a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseLeftShift(a, b);
+        }
+    |   #(SR a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseRightShift(a, b);
+        }
+    |   #(BSR a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseUnsignedRightShift(a, b);
         }
     |   #(PLUS a = expr b = expr) {
             if (a==null || b==null) {

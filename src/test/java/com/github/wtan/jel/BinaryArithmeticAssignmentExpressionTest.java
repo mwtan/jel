@@ -19,10 +19,9 @@ public class BinaryArithmeticAssignmentExpressionTest extends TestCase {
 			IExpression cond = new PlusAssign(new Break(), null);
 			Map m = new HashMap();
 			Object o = cond.eval(m);
-			assertTrue(o == null);
+			fail();
 		}
 		catch (Exception e) {
-			fail("   FAILED.");
 		}
 	}
 

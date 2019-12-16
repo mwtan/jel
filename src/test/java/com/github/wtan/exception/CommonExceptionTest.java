@@ -86,8 +86,6 @@ public class CommonExceptionTest extends TestCase {
 		throw new Exception("baz");
 	}
 	
-	
-	
 	public void test_getPrintStackTrace_null_exception() {
 		try {
 			String s1 = CommonException.getPrintStackTrace(null);

@@ -21,10 +21,19 @@ import junit.framework.TestCase;
  * @author Will Tan
  */
 public class StatementTest extends TestCase {
+	private static final byte BYTE_0X05 = 0x05;
+	private static final byte BYTE_0X06 = 0x06;
 	private static final byte BYTE_0X16 = 0x16;
 	private static final byte BYTE_0X16_NEG = -0x16;
+	private static final char CHAR_5 = 5;
+	private static final char CHAR_6 = 6;
 	private static final char CHAR_A = 'a';
+	private static final short SHORT_5 = 5;
+	private static final short SHORT_6 = 6;
 	private static final short SHORT_256 = 256;
+	private static final int INT_5 = 5;
+	private static final int INT_6 = 6;
+	private static final int INT_12 = 12;
 	private static final int INT_21 = 21;
 	private static final int INT_MINUS_21 = -21;
 	private static final int INT_42 = 42;
@@ -54,11 +63,23 @@ public class StatementTest extends TestCase {
 		m.put("id", "31");
 		m.put("indicator_true", true);
 		m.put("indicator_false", false);
+		m.put("char5", new Character(CHAR_5));
+		m.put("char6", new Character(CHAR_6));
+		m.put("varbyte5", new Byte(BYTE_0X05));
+		m.put("varbyte6", new Byte(BYTE_0X06));
 		m.put("varbyte", new Byte(BYTE_0X16));
 		m.put("varbyteneg", new Byte(BYTE_0X16_NEG));
 		m.put("varchar", new Character(CHAR_A));
+		m.put("varshort5", new Short(SHORT_5));
+		m.put("varshort6", new Short(SHORT_6));
 		m.put("varshort", new Short(SHORT_256));
+		m.put("varint5", new Integer(INT_5));
+		m.put("varint6", new Integer(INT_6));
+		m.put("varint12", new Integer(INT_12));
 		m.put("varint", new Integer(INT_512));
+		m.put("varlong5", new Long(5));
+		m.put("varlong6", new Long(6));
+		m.put("varlong12", new Long(12));
 		m.put("varlong", new Long(LONG_93000000));
 		m.put("dist", new Long(LONG_93000000));
 		m.put("pi", new Float(FLOAT_PI));
@@ -66,6 +87,7 @@ public class StatementTest extends TestCase {
 		m.put("description", "Ask not what your country can do for you...");
 		m.put("myobj", new MyClass(INT_42, "hello"));
 		m.put("myobj2", new Date());
+		m.put("nullobj", null);
 	}
 
 	public void test_parse_error_missing_semicolon() {
@@ -196,6 +218,7 @@ public class StatementTest extends TestCase {
 			assertEquals(255, ((Integer) m.get("val")).intValue());
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			fail("   FAILED. Exception:" + e.toString());
 		}
 	}
@@ -402,6 +425,16 @@ public class StatementTest extends TestCase {
 		}
 	}
 
+	public void test_invalid_plusassign() {
+		try {
+			IExpression cond = Statement.parse("2 += varint;");
+			cond.eval(m);
+			fail();
+		}
+		catch (Exception e) {
+		}
+	}
+
 	/**
 	 * -=
 	 */
@@ -429,6 +462,16 @@ public class StatementTest extends TestCase {
 		}
 		catch (Exception e) {
 			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_invalid_minusassign() {
+		try {
+			IExpression cond = Statement.parse("2 -= varint;");
+			cond.eval(m);
+			fail();
+		}
+		catch (Exception e) {
 		}
 	}
 
@@ -1118,6 +1161,234 @@ public class StatementTest extends TestCase {
 		}
 	}
 
+	public void test_bitwise_or_byte() {
+		try {
+			IExpression cond = Statement.parse("return varbyte6 | varbyte5;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 7);
+			cond = Statement.parse("return null | varbyte5;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 5);
+			cond = Statement.parse("return varbyte6 | null;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 6);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_or_char() {
+		try {
+			IExpression cond = Statement.parse("return char6 | char5;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 7);
+			cond = Statement.parse("return null | char5;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 5);
+			cond = Statement.parse("return char6 | null;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 6);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_or_short() {
+		try {
+			IExpression cond = Statement.parse("return varshort6 | varshort5;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 7);
+			cond = Statement.parse("return null | varshort5;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 5);
+			cond = Statement.parse("return varshort6 | null;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 6);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_or_integer() {
+		try {
+			IExpression cond = Statement.parse("return varint6 | varint5;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 7);
+			cond = Statement.parse("return null | varint5;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 5);
+			cond = Statement.parse("return varint6 | null;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 6);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_or_long() {
+		try {
+			IExpression cond = Statement.parse("return varlong6 | varlong5;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Long) objeval).longValue() == 7);
+			cond = Statement.parse("return null | varlong5;");
+			objeval = cond.eval(m);
+			assertTrue(((Long) objeval).intValue() == 5);
+			cond = Statement.parse("return varlong6 | null;");
+			objeval = cond.eval(m);
+			assertTrue(((Long) objeval).intValue() == 6);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_or_invalid_object() {
+		try {
+			IExpression cond = Statement.parse("return myobj | myobj2;");
+			Object objeval = cond.eval(m);
+			fail("   FAILED. Exception expected.");
+		}
+		catch (Exception e) {
+		}
+	}
+
+	public void test_bitwise_or_null_object() {
+		try {
+			IExpression cond = Statement.parse("return nullobj | nullobj;");
+			Object objeval = cond.eval(m);
+			fail("   FAILED. Exception expected.");
+		}
+		catch (Exception e) {
+		}
+	}
+	
+	public void test_bitwise_orassign() {
+		try {
+			IExpression cond = Statement.parse("{ intcode = 5; intcode |= varint6; }");
+			Object objeval = cond.eval(m);
+			assertEquals(7, ((Integer) m.get("intcode")).intValue());
+			cond = Statement.parse("{ longcode = 5L; longcode |= varlong6; }");
+			objeval = cond.eval(m);
+			assertEquals(7L, ((Long) m.get("longcode")).longValue());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_invalid_bitwise_orassign() {
+		try {
+			IExpression cond = Statement.parse("2 |= varint6;");
+			cond.eval(m);
+			fail();
+		}
+		catch (Exception e) {
+		}
+	}
+
+	public void test_bitwise_xor_integer() {
+		try {
+			IExpression cond = Statement.parse("return varint6 ^ varint5;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 3);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_xor_long() {
+		try {
+			IExpression cond = Statement.parse("return varlong6 ^ varlong5;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Long) objeval).longValue() == 3);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_xorassign() {
+		try {
+			IExpression cond = Statement.parse("{ intcode = 5; intcode ^= varint6; }");
+			Object objeval = cond.eval(m);
+			assertEquals(3, ((Integer) m.get("intcode")).intValue());
+			cond = Statement.parse("{ longcode = 5L; longcode ^= varlong6; }");
+			objeval = cond.eval(m);
+			assertEquals(3L, ((Long) m.get("longcode")).longValue());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_and_integer() {
+		try {
+			IExpression cond = Statement.parse("return varint6 & varint5;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 4);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_and_long() {
+		try {
+			IExpression cond = Statement.parse("return varlong6 & varlong5;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Long) objeval).longValue() == 4);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_andassign() {
+		try {
+			IExpression cond = Statement.parse("{ intcode = 5; intcode &= varint6; }");
+			Object objeval = cond.eval(m);
+			assertEquals(4, ((Integer) m.get("intcode")).intValue());
+			cond = Statement.parse("{ longcode = 5L; longcode &= varlong6; }");
+			objeval = cond.eval(m);
+			assertEquals(4L, ((Long) m.get("longcode")).longValue());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_null_var() {
+		try {
+			IExpression cond = Statement.parse("{ mynullvar &= varint6; }");
+			Object objeval = cond.eval(m);
+			assertEquals(0, ((Integer) m.get("mynullvar")).intValue());
+			cond = Statement.parse("{ mynullvar |= varint6; }");
+			objeval = cond.eval(m);
+			assertEquals(6, ((Integer) m.get("mynullvar")).longValue());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
 	/**
 	 * Test not operator
 	 */
@@ -1143,6 +1414,304 @@ public class StatementTest extends TestCase {
 			IExpression cond = Statement.parse("if (!(rc == 21 && id == 99)) return true;");
 			Object objeval = cond.eval(m);
 			assertEquals("(!(rc == 21 && id == 99))", true, ((Boolean) objeval).booleanValue());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_not_byte() {
+		try {
+			IExpression cond = Statement.parse("{ return ~varbyte6; }");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == -7);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_not_char() {
+		try {
+			IExpression cond = Statement.parse("{ return ~char6; }");
+			Object obj = cond.eval(m);
+			assertTrue(((Integer) obj).intValue() == -7);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_not_short() {
+		try {
+			IExpression cond = Statement.parse("{ return ~varshort6; }");
+			Object obj = cond.eval(m);
+			assertTrue(((Integer) obj).intValue() == -7);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_not_integer() {
+		try {
+			IExpression cond = Statement.parse("{ val=6; return ~val; }");
+			assertTrue(((Integer) cond.eval(m)).intValue() == -7);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_not_long() {
+		try {
+			IExpression cond = Statement.parse("{ val=6L; return ~val; }");
+			assertTrue(((Long) cond.eval(m)).longValue() == -7L);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_not_invalid_object() {
+		try {
+			IExpression cond = Statement.parse("return ~myobj;");
+			Object objeval = cond.eval(m);
+			fail("   FAILED. Exception expected.");
+		}
+		catch (Exception e) {
+		}
+	}
+
+	public void test_bitwise_leftshift_byte() {
+		try {
+			IExpression cond = Statement.parse("return varbyte6 << 2;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 24);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_leftshift_char() {
+		try {
+			IExpression cond = Statement.parse("return char6 << 2;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 24);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_leftshift_short() {
+		try {
+			IExpression cond = Statement.parse("return varshort6 << 2;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 24);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_leftshift_integer() {
+		try {
+			IExpression cond = Statement.parse("return varint12 << 2;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 48);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_leftshift_long() {
+		try {
+			IExpression cond = Statement.parse("return varlong12 << 2;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Long) objeval).longValue() == 48);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_leftshift_null_multiple() {
+		try {
+			IExpression cond = Statement.parse("return varint12 << null;");
+			Object objeval = cond.eval(m);
+			fail();
+		}
+		catch (Exception e) {
+		}
+	}
+
+	public void test_bitwise_leftshift_invalid_multiple_object() {
+		try {
+			IExpression cond = Statement.parse("return varint12 << \"hello\";");
+			Object objeval = cond.eval(m);
+			fail();
+		}
+		catch (Exception e) {
+		}
+	}
+
+	public void test_bitwise_leftshift_null_value() {
+		try {
+			IExpression cond = Statement.parse("return null << 2;");
+			Object objeval = cond.eval(m);
+			fail();
+		}
+		catch (Exception e) {
+		}
+	}
+
+	public void test_bitwise_leftshift_invalid_object() {
+		try {
+			IExpression cond = Statement.parse("return \"hello\" << 2;");
+			Object objeval = cond.eval(m);
+			fail();
+		}
+		catch (Exception e) {
+		}
+	}
+
+	public void test_bitwise_leftshift_assign() {
+		try {
+			IExpression cond = Statement.parse("{ intcode = 12; intcode <<= 2; }");
+			Object objeval = cond.eval(m);
+			assertEquals(48, ((Integer) m.get("intcode")).intValue());
+			cond = Statement.parse("{ longcode = 12L; longcode <<= 2; }");
+			objeval = cond.eval(m);
+			assertEquals(48L, ((Long) m.get("longcode")).longValue());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_invalid_bitwise_leftshift_assign() {
+		try {
+			IExpression cond = Statement.parse("2 <<= 2;");
+			cond.eval(m);
+			fail();
+		}
+		catch (Exception e) {
+		}
+	}
+
+	public void test_bitwise_rightshift_integer() {
+		try {
+			IExpression cond = Statement.parse("return varint12 >> 2;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 3);
+			cond = Statement.parse("return -12 >> 2;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == -3);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_rightshift_long() {
+		try {
+			IExpression cond = Statement.parse("return varlong12 >> 2;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Long) objeval).longValue() == 3);
+			cond = Statement.parse("return -12L >> 2;");
+			objeval = cond.eval(m);
+			assertTrue(((Long) objeval).longValue() == -3);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_shift_assign_null_var() {
+		try {
+			IExpression cond = Statement.parse("{ mynullvar >>= 2; }");
+			Object objeval = cond.eval(m);
+			assertEquals(0, ((Integer) m.get("mynullvar")).intValue());
+			cond = Statement.parse("{ mynullvar >>= 2; }");
+			objeval = cond.eval(m);
+			assertEquals(0, ((Integer) m.get("mynullvar")).longValue());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_rightshift_assign() {
+		try {
+			IExpression cond = Statement.parse("{ intcode = 12; intcode >>= 2; }");
+			Object objeval = cond.eval(m);
+			assertEquals(3, ((Integer) m.get("intcode")).intValue());
+			cond = Statement.parse("{ longcode = 12L; longcode >>= 2; }");
+			objeval = cond.eval(m);
+			assertEquals(3L, ((Long) m.get("longcode")).longValue());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_unsigned_rightshift_integer() {
+		try {
+			IExpression cond = Statement.parse("return 12 >>> 2;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 3);
+			cond = Statement.parse("return -12 >>> 2;");
+			objeval = cond.eval(m);
+			assertTrue(((Integer) objeval).intValue() == 1073741821);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_unsigned_rightshift_long() {
+		try {
+			IExpression cond = Statement.parse("return 12L >>> 2;");
+			Object objeval = cond.eval(m);
+			assertTrue(((Long) objeval).longValue() == 3);
+			cond = Statement.parse("return -12L >>> 2;");
+			objeval = cond.eval(m);
+			assertTrue(((Long) objeval).longValue() == 4611686018427387901L);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			fail("   FAILED. Exception:" + e.toString());
+		}
+	}
+
+	public void test_bitwise_unsigned_rightshift_assign() {
+		try {
+			IExpression cond = Statement.parse("{ intcode = 12; intcode >>>= 2; }");
+			Object objeval = cond.eval(m);
+			assertEquals(3, ((Integer) m.get("intcode")).intValue());
+			cond = Statement.parse("{ longcode = 12L; longcode >>>= 2; }");
+			objeval = cond.eval(m);
+			assertEquals(3L, ((Long) m.get("longcode")).longValue());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -1679,6 +2248,16 @@ public class StatementTest extends TestCase {
 		}
 	}
 
+	public void test_plus_null_object() {
+		try {
+			IExpression cond = Statement.parse("return nullobj + nullobj;");
+			Object objeval = cond.eval(m);
+			fail("   FAILED. Exception expected.");
+		}
+		catch (Exception e) {
+		}
+	}
+	
 	public void test_plus_byte() {
 		IExpression cond = null;
 		Object objeval = null;

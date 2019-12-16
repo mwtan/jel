@@ -258,17 +258,23 @@ equalityExpression
 
 // boolean relational expressions (level 5)
 relationalExpression
-    :   additiveExpression
+    :   shiftExpression
         (   (   (   LT^
                 |   GT^
                 |   LE^
                 |   GE^
                 )
-                additiveExpression
+                shiftExpression
             )*
 		|	"instanceof"^ classTypeSpec
         )
     ;
+
+
+// bit shift expressions (level 4)
+shiftExpression
+	:	additiveExpression ((SL^ | SR^ | BSR^) additiveExpression)*
+	;
 
 
 // binary addition/subtraction (level 3)

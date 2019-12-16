@@ -741,11 +741,11 @@ public StatementTreeParser() {
 				
 				break;
 			}
-			case LOR:
+			case SR_ASSIGN:
 			{
 				AST __t46 = _t;
 				AST tmp28_AST_in = (AST)_t;
-				match(_t,LOR);
+				match(_t,SR_ASSIGN);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -757,15 +757,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new Or(a, b);
+				r = new BitwiseRightShiftAssign(a, b);
 				
 				break;
 			}
-			case LAND:
+			case BSR_ASSIGN:
 			{
 				AST __t47 = _t;
 				AST tmp29_AST_in = (AST)_t;
-				match(_t,LAND);
+				match(_t,BSR_ASSIGN);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -777,15 +777,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new And(a, b);
+				r = new BitwiseUnsignedRightShiftAssign(a, b);
 				
 				break;
 			}
-			case BOR:
+			case SL_ASSIGN:
 			{
 				AST __t48 = _t;
 				AST tmp30_AST_in = (AST)_t;
-				match(_t,BOR);
+				match(_t,SL_ASSIGN);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -797,15 +797,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new BitwiseOr(a, b);
+				r = new BitwiseLeftShiftAssign(a, b);
 				
 				break;
 			}
-			case BXOR:
+			case BAND_ASSIGN:
 			{
 				AST __t49 = _t;
 				AST tmp31_AST_in = (AST)_t;
-				match(_t,BXOR);
+				match(_t,BAND_ASSIGN);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -817,15 +817,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new BitwiseXor(a, b);
+				r = new BitwiseAndAssign(a, b);
 				
 				break;
 			}
-			case BAND:
+			case BXOR_ASSIGN:
 			{
 				AST __t50 = _t;
 				AST tmp32_AST_in = (AST)_t;
-				match(_t,BAND);
+				match(_t,BXOR_ASSIGN);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -837,15 +837,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new BitwiseAnd(a, b);
+				r = new BitwiseXorAssign(a, b);
 				
 				break;
 			}
-			case NOT_EQUAL:
+			case BOR_ASSIGN:
 			{
 				AST __t51 = _t;
 				AST tmp33_AST_in = (AST)_t;
-				match(_t,NOT_EQUAL);
+				match(_t,BOR_ASSIGN);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -857,15 +857,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new NotEqual(a, b);
+				r = new BitwiseOrAssign(a, b);
 				
 				break;
 			}
-			case EQUAL:
+			case LOR:
 			{
 				AST __t52 = _t;
 				AST tmp34_AST_in = (AST)_t;
-				match(_t,EQUAL);
+				match(_t,LOR);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -877,15 +877,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new EqualEqual(a, b);
+				r = new Or(a, b);
 				
 				break;
 			}
-			case LT:
+			case LAND:
 			{
 				AST __t53 = _t;
 				AST tmp35_AST_in = (AST)_t;
-				match(_t,LT);
+				match(_t,LAND);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -897,15 +897,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new LessThan(a, b);
+				r = new And(a, b);
 				
 				break;
 			}
-			case GT:
+			case BOR:
 			{
 				AST __t54 = _t;
 				AST tmp36_AST_in = (AST)_t;
-				match(_t,GT);
+				match(_t,BOR);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -917,15 +917,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new GreaterThan(a, b);
+				r = new BitwiseOr(a, b);
 				
 				break;
 			}
-			case LE:
+			case BXOR:
 			{
 				AST __t55 = _t;
 				AST tmp37_AST_in = (AST)_t;
-				match(_t,LE);
+				match(_t,BXOR);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -937,15 +937,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new LessThanEqual(a, b);
+				r = new BitwiseXor(a, b);
 				
 				break;
 			}
-			case GE:
+			case BAND:
 			{
 				AST __t56 = _t;
 				AST tmp38_AST_in = (AST)_t;
-				match(_t,GE);
+				match(_t,BAND);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -957,15 +957,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new GreaterThanEqual(a, b);
+				r = new BitwiseAnd(a, b);
 				
 				break;
 			}
-			case PLUS:
+			case NOT_EQUAL:
 			{
 				AST __t57 = _t;
 				AST tmp39_AST_in = (AST)_t;
-				match(_t,PLUS);
+				match(_t,NOT_EQUAL);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -977,15 +977,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new Plus(a, b);
+				r = new NotEqual(a, b);
 				
 				break;
 			}
-			case MINUS:
+			case EQUAL:
 			{
 				AST __t58 = _t;
 				AST tmp40_AST_in = (AST)_t;
-				match(_t,MINUS);
+				match(_t,EQUAL);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -997,15 +997,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new Minus(a, b);
+				r = new EqualEqual(a, b);
 				
 				break;
 			}
-			case DIV:
+			case LT:
 			{
 				AST __t59 = _t;
 				AST tmp41_AST_in = (AST)_t;
-				match(_t,DIV);
+				match(_t,LT);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -1017,15 +1017,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new Divide(a, b);
+				r = new LessThan(a, b);
 				
 				break;
 			}
-			case MOD:
+			case GT:
 			{
 				AST __t60 = _t;
 				AST tmp42_AST_in = (AST)_t;
-				match(_t,MOD);
+				match(_t,GT);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -1037,15 +1037,15 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
-				r = new Modulus(a, b);
+				r = new GreaterThan(a, b);
 				
 				break;
 			}
-			case STAR:
+			case LE:
 			{
 				AST __t61 = _t;
 				AST tmp43_AST_in = (AST)_t;
-				match(_t,STAR);
+				match(_t,LE);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
@@ -1057,19 +1057,199 @@ public StatementTreeParser() {
 				if (a==null || b==null) {
 				throw new RecognitionException(EXCEPTION_MSG);
 				}
+				r = new LessThanEqual(a, b);
+				
+				break;
+			}
+			case GE:
+			{
+				AST __t62 = _t;
+				AST tmp44_AST_in = (AST)_t;
+				match(_t,GE);
+				_t = _t.getFirstChild();
+				a=expr(_t);
+				_t = _retTree;
+				b=expr(_t);
+				_t = _retTree;
+				_t = __t62;
+				_t = _t.getNextSibling();
+				
+				if (a==null || b==null) {
+				throw new RecognitionException(EXCEPTION_MSG);
+				}
+				r = new GreaterThanEqual(a, b);
+				
+				break;
+			}
+			case SL:
+			{
+				AST __t63 = _t;
+				AST tmp45_AST_in = (AST)_t;
+				match(_t,SL);
+				_t = _t.getFirstChild();
+				a=expr(_t);
+				_t = _retTree;
+				b=expr(_t);
+				_t = _retTree;
+				_t = __t63;
+				_t = _t.getNextSibling();
+				
+				if (a==null || b==null) {
+				throw new RecognitionException(EXCEPTION_MSG);
+				}
+				r = new BitwiseLeftShift(a, b);
+				
+				break;
+			}
+			case SR:
+			{
+				AST __t64 = _t;
+				AST tmp46_AST_in = (AST)_t;
+				match(_t,SR);
+				_t = _t.getFirstChild();
+				a=expr(_t);
+				_t = _retTree;
+				b=expr(_t);
+				_t = _retTree;
+				_t = __t64;
+				_t = _t.getNextSibling();
+				
+				if (a==null || b==null) {
+				throw new RecognitionException(EXCEPTION_MSG);
+				}
+				r = new BitwiseRightShift(a, b);
+				
+				break;
+			}
+			case BSR:
+			{
+				AST __t65 = _t;
+				AST tmp47_AST_in = (AST)_t;
+				match(_t,BSR);
+				_t = _t.getFirstChild();
+				a=expr(_t);
+				_t = _retTree;
+				b=expr(_t);
+				_t = _retTree;
+				_t = __t65;
+				_t = _t.getNextSibling();
+				
+				if (a==null || b==null) {
+				throw new RecognitionException(EXCEPTION_MSG);
+				}
+				r = new BitwiseUnsignedRightShift(a, b);
+				
+				break;
+			}
+			case PLUS:
+			{
+				AST __t66 = _t;
+				AST tmp48_AST_in = (AST)_t;
+				match(_t,PLUS);
+				_t = _t.getFirstChild();
+				a=expr(_t);
+				_t = _retTree;
+				b=expr(_t);
+				_t = _retTree;
+				_t = __t66;
+				_t = _t.getNextSibling();
+				
+				if (a==null || b==null) {
+				throw new RecognitionException(EXCEPTION_MSG);
+				}
+				r = new Plus(a, b);
+				
+				break;
+			}
+			case MINUS:
+			{
+				AST __t67 = _t;
+				AST tmp49_AST_in = (AST)_t;
+				match(_t,MINUS);
+				_t = _t.getFirstChild();
+				a=expr(_t);
+				_t = _retTree;
+				b=expr(_t);
+				_t = _retTree;
+				_t = __t67;
+				_t = _t.getNextSibling();
+				
+				if (a==null || b==null) {
+				throw new RecognitionException(EXCEPTION_MSG);
+				}
+				r = new Minus(a, b);
+				
+				break;
+			}
+			case DIV:
+			{
+				AST __t68 = _t;
+				AST tmp50_AST_in = (AST)_t;
+				match(_t,DIV);
+				_t = _t.getFirstChild();
+				a=expr(_t);
+				_t = _retTree;
+				b=expr(_t);
+				_t = _retTree;
+				_t = __t68;
+				_t = _t.getNextSibling();
+				
+				if (a==null || b==null) {
+				throw new RecognitionException(EXCEPTION_MSG);
+				}
+				r = new Divide(a, b);
+				
+				break;
+			}
+			case MOD:
+			{
+				AST __t69 = _t;
+				AST tmp51_AST_in = (AST)_t;
+				match(_t,MOD);
+				_t = _t.getFirstChild();
+				a=expr(_t);
+				_t = _retTree;
+				b=expr(_t);
+				_t = _retTree;
+				_t = __t69;
+				_t = _t.getNextSibling();
+				
+				if (a==null || b==null) {
+				throw new RecognitionException(EXCEPTION_MSG);
+				}
+				r = new Modulus(a, b);
+				
+				break;
+			}
+			case STAR:
+			{
+				AST __t70 = _t;
+				AST tmp52_AST_in = (AST)_t;
+				match(_t,STAR);
+				_t = _t.getFirstChild();
+				a=expr(_t);
+				_t = _retTree;
+				b=expr(_t);
+				_t = _retTree;
+				_t = __t70;
+				_t = _t.getNextSibling();
+				
+				if (a==null || b==null) {
+				throw new RecognitionException(EXCEPTION_MSG);
+				}
 				r = new Multiply(a, b);
 				
 				break;
 			}
 			case INC:
 			{
-				AST __t62 = _t;
-				AST tmp44_AST_in = (AST)_t;
+				AST __t71 = _t;
+				AST tmp53_AST_in = (AST)_t;
 				match(_t,INC);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
-				_t = __t62;
+				_t = __t71;
 				_t = _t.getNextSibling();
 				
 				if (a==null) {
@@ -1081,13 +1261,13 @@ public StatementTreeParser() {
 			}
 			case DEC:
 			{
-				AST __t63 = _t;
-				AST tmp45_AST_in = (AST)_t;
+				AST __t72 = _t;
+				AST tmp54_AST_in = (AST)_t;
 				match(_t,DEC);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
-				_t = __t63;
+				_t = __t72;
 				_t = _t.getNextSibling();
 				
 				if (a==null) {
@@ -1099,13 +1279,13 @@ public StatementTreeParser() {
 			}
 			case POST_INC:
 			{
-				AST __t64 = _t;
-				AST tmp46_AST_in = (AST)_t;
+				AST __t73 = _t;
+				AST tmp55_AST_in = (AST)_t;
 				match(_t,POST_INC);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
-				_t = __t64;
+				_t = __t73;
 				_t = _t.getNextSibling();
 				
 				if (a==null) {
@@ -1117,13 +1297,13 @@ public StatementTreeParser() {
 			}
 			case POST_DEC:
 			{
-				AST __t65 = _t;
-				AST tmp47_AST_in = (AST)_t;
+				AST __t74 = _t;
+				AST tmp56_AST_in = (AST)_t;
 				match(_t,POST_DEC);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
-				_t = __t65;
+				_t = __t74;
 				_t = _t.getNextSibling();
 				
 				if (a==null) {
@@ -1135,13 +1315,13 @@ public StatementTreeParser() {
 			}
 			case BNOT:
 			{
-				AST __t66 = _t;
-				AST tmp48_AST_in = (AST)_t;
+				AST __t75 = _t;
+				AST tmp57_AST_in = (AST)_t;
 				match(_t,BNOT);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
-				_t = __t66;
+				_t = __t75;
 				_t = _t.getNextSibling();
 				
 				if (a==null) {
@@ -1153,13 +1333,13 @@ public StatementTreeParser() {
 			}
 			case LNOT:
 			{
-				AST __t67 = _t;
-				AST tmp49_AST_in = (AST)_t;
+				AST __t76 = _t;
+				AST tmp58_AST_in = (AST)_t;
 				match(_t,LNOT);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
-				_t = __t67;
+				_t = __t76;
 				_t = _t.getNextSibling();
 				
 				if (a==null) {
@@ -1171,15 +1351,15 @@ public StatementTreeParser() {
 			}
 			case LITERAL_instanceof:
 			{
-				AST __t68 = _t;
-				AST tmp50_AST_in = (AST)_t;
+				AST __t77 = _t;
+				AST tmp59_AST_in = (AST)_t;
 				match(_t,LITERAL_instanceof);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
 				b=expr(_t);
 				_t = _retTree;
-				_t = __t68;
+				_t = __t77;
 				_t = _t.getNextSibling();
 				
 				if (a==null) {
@@ -1191,13 +1371,13 @@ public StatementTreeParser() {
 			}
 			case UNARY_MINUS:
 			{
-				AST __t69 = _t;
-				AST tmp51_AST_in = (AST)_t;
+				AST __t78 = _t;
+				AST tmp60_AST_in = (AST)_t;
 				match(_t,UNARY_MINUS);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
-				_t = __t69;
+				_t = __t78;
 				_t = _t.getNextSibling();
 				
 				if (a==null) {
@@ -1209,13 +1389,13 @@ public StatementTreeParser() {
 			}
 			case UNARY_PLUS:
 			{
-				AST __t70 = _t;
-				AST tmp52_AST_in = (AST)_t;
+				AST __t79 = _t;
+				AST tmp61_AST_in = (AST)_t;
 				match(_t,UNARY_PLUS);
 				_t = _t.getFirstChild();
 				a=expr(_t);
 				_t = _retTree;
-				_t = __t70;
+				_t = __t79;
 				_t = _t.getNextSibling();
 				
 				if (a==null) {
@@ -1282,8 +1462,8 @@ public StatementTreeParser() {
 			}
 			case DOT:
 			{
-				AST __t72 = _t;
-				AST tmp53_AST_in = (AST)_t;
+				AST __t81 = _t;
+				AST tmp62_AST_in = (AST)_t;
 				match(_t,DOT);
 				_t = _t.getFirstChild();
 				{
@@ -1294,7 +1474,7 @@ public StatementTreeParser() {
 				_t = _retTree;
 				}
 				}
-				_t = __t72;
+				_t = __t81;
 				_t = _t.getNextSibling();
 				
 				if (a==null || b==null) {
@@ -1306,15 +1486,15 @@ public StatementTreeParser() {
 			}
 			case METHOD_CALL:
 			{
-				AST __t75 = _t;
-				AST tmp54_AST_in = (AST)_t;
+				AST __t84 = _t;
+				AST tmp63_AST_in = (AST)_t;
 				match(_t,METHOD_CALL);
 				_t = _t.getFirstChild();
 				a=primaryExpression(_t);
 				_t = _retTree;
 				el=elist(_t);
 				_t = _retTree;
-				_t = __t75;
+				_t = __t84;
 				_t = _t.getNextSibling();
 				
 				if (a==null || el==null) {
@@ -1343,7 +1523,7 @@ public StatementTreeParser() {
 			}
 			case LITERAL_true:
 			{
-				AST tmp55_AST_in = (AST)_t;
+				AST tmp64_AST_in = (AST)_t;
 				match(_t,LITERAL_true);
 				_t = _t.getNextSibling();
 				
@@ -1353,7 +1533,7 @@ public StatementTreeParser() {
 			}
 			case LITERAL_false:
 			{
-				AST tmp56_AST_in = (AST)_t;
+				AST tmp65_AST_in = (AST)_t;
 				match(_t,LITERAL_false);
 				_t = _t.getNextSibling();
 				
@@ -1363,7 +1543,7 @@ public StatementTreeParser() {
 			}
 			case LITERAL_null:
 			{
-				AST tmp57_AST_in = (AST)_t;
+				AST tmp66_AST_in = (AST)_t;
 				match(_t,LITERAL_null);
 				_t = _t.getNextSibling();
 				
@@ -1395,15 +1575,15 @@ public StatementTreeParser() {
 		
 		
 		try {      // for error handling
-			AST __t77 = _t;
-			AST tmp58_AST_in = (AST)_t;
+			AST __t86 = _t;
+			AST tmp67_AST_in = (AST)_t;
 			match(_t,LITERAL_new);
 			_t = _t.getFirstChild();
 			a=primaryExpression(_t);
 			_t = _retTree;
 			e1=elist(_t);
 			_t = _retTree;
-			_t = __t77;
+			_t = __t86;
 			_t = _t.getNextSibling();
 			
 			r = new New(a, e1);
@@ -1600,6 +1780,9 @@ public StatementTreeParser() {
 		"LE",
 		"GE",
 		"\"instanceof\"",
+		"SL",
+		"SR",
+		"BSR",
 		"PLUS",
 		"MINUS",
 		"STAR",
@@ -1620,9 +1803,6 @@ public StatementTreeParser() {
 		"NUM_FLOAT",
 		"NUM_LONG",
 		"NUM_DOUBLE",
-		"SR",
-		"BSR",
-		"SL",
 		"WS",
 		"SL_COMMENT",
 		"ML_COMMENT",
