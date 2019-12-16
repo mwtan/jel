@@ -5,7 +5,7 @@ import java.util.Map;
 import com.github.wtan.jel.exception.ExpressionException;
 
 /**
- * Represents a Java "if (expression) statement" where the statement is evaluated
+ * Represents a Java "if" statement" where the "then" expression is evaluated
  * if the boolean expression is true, otherwise the "else" expression is
  * evaluated (if one exists).
  *
@@ -33,7 +33,7 @@ class If extends Expression {
 	/**
 	 * Evaluates the if-condition and returns the result of the if-statement.
 	 */
-	public Object eval(Map m) throws ExpressionException {
+	public Object eval(Map<?, ?> m) throws ExpressionException {
 		Object ret = null;  // Returns null if condition not met
 		if (getboolean(expr1.eval(m))) {
 			ret = expr2.eval(m);

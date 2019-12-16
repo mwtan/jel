@@ -9,8 +9,6 @@ import com.github.wtan.jel.exception.ExpressionException;
  * can be evaluated.
  *
  * @author Will Tan
- * <br>12/01/04 Will Tan - Initial development.
- * <br>02/11/05 Will Tan - Removed public access on constructor.
  */
 public interface IExpression {
 	/**
@@ -24,5 +22,5 @@ public interface IExpression {
 	 *         condition is not met, the return statement is not executed and the
 	 *         expression returns a Boolean that's neither true or false, but a null.)
 	 */
-	Object eval(Map m) throws ExpressionException;
+	Object eval(Map<?, ?> m) throws ExpressionException;
 }
