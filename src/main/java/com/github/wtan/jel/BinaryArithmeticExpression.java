@@ -24,7 +24,7 @@ abstract class BinaryArithmeticExpression extends MultiExpression {
 	/**
 	 * @inheritDoc
 	 */
-	public Object eval(Map m) throws ExpressionException {
+	public Object eval(Map<?, ?> m) throws ExpressionException {
 		Object obj1 = expr1.eval(m);
 		Object obj2 = expr2.eval(m);
 		return evalBinary(obj1, obj2);
@@ -80,7 +80,9 @@ abstract class BinaryArithmeticExpression extends MultiExpression {
 		if (obj1 instanceof Boolean || obj2 instanceof Boolean) {
 			throw new ExpressionException("Cannot evaluate boolean in arithmetic expression.");
 		}
-		throw new ExpressionException("Unknown or invalid type.");
+		throw new ExpressionException("Invalid types for arithmetic operation: " + 
+				((obj1 != null) ? obj1.getClass() : null) + " : " + 
+				((obj2 != null) ? obj2.getClass() : null));
 	}
 
 	/**
