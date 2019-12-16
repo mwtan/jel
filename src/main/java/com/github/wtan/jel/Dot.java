@@ -32,7 +32,7 @@ class Dot extends MultiExpression {
 	 * Reflects on the ObjectRef (expression 1) and retrieves the field
 	 * (named by expression 2).
 	 */
-	public Object eval(Map m) throws ExpressionException {
+	public Object eval(Map<?, ?> m) throws ExpressionException {
 		try {
 			// Get attribute name
 			String name = ((IdentValue) expr2).eval();
@@ -189,22 +189,27 @@ class Dot extends MultiExpression {
 			catch (ClassNotFoundException e) {
 				try {
 					// Try loading class from java.lang
-					clazz = loadJavaLangCLass(classname);
+					clazz = Class.forName("java.lang." + classname);
 				}
 				catch (ClassNotFoundException e1) {
-					clazz = loadJavaUtilCLass(classname);
+					try {
+						// Try loading class from java.util
+						clazz = Class.forName("java.util." + classname);
+					}
+					catch (ClassNotFoundException e2) {
+						try {
+							// Try loading class from java.io
+							clazz = Class.forName("java.io." + classname);
+						}
+						catch (ClassNotFoundException e3) {
+							// Try loading class from java.text
+							clazz = Class.forName("java.text." + classname);
+						}
+					}
 				}
 			}
 		}
 		return clazz;
-	}
-	
-	private static Class<?> loadJavaLangCLass(String name) throws ClassNotFoundException {
-		return Class.forName("java.lang." + name);
-	}
-
-	private static Class<?> loadJavaUtilCLass(String name) throws ClassNotFoundException {
-		return Class.forName("java.util." + name);
 	}
 
 	private static Class<?> loadDefaultClass(String name) throws ClassNotFoundException {
