@@ -27,7 +27,7 @@ abstract class UnaryArithmeticExpression extends Expression {
 	/**
 	 * @inheritDoc
 	 */
-	public Object eval(Map m) throws ExpressionException {
+	public Object eval(Map<?, ?> m) throws ExpressionException {
 		Object obj = expr.eval(m);
 		return evalUnary(m, obj);
 	}
@@ -39,7 +39,7 @@ abstract class UnaryArithmeticExpression extends Expression {
 	 * @throws ExpressionException
 	 * @return Object
 	 */
-	protected final Object evalUnary(Map m, Object obj)
+	protected final Object evalUnary(Map<?, ?> m, Object obj)
 		throws ExpressionException {
 		if (obj instanceof Double) {
 			return evaldouble(m, getdouble(obj));
@@ -62,7 +62,7 @@ abstract class UnaryArithmeticExpression extends Expression {
 		if (obj instanceof Byte) {
 			return evalbyte(m, getbyte(obj));
 		}
-		throw new ExpressionException("Unknown type.");
+		throw new ExpressionException("Unknown type: " + ((obj != null) ? obj.getClass() : null));
 	}
 
 	/**
@@ -71,7 +71,7 @@ abstract class UnaryArithmeticExpression extends Expression {
 	 * @throws ExpressionException
 	 * @return Object
 	 */
-	public abstract Object evalbyte(Map m, byte obj)
+	public abstract Object evalbyte(Map<?, ?> m, byte obj)
 		throws ExpressionException;
 	/**
 	 * Unary operation on a char.
@@ -79,7 +79,7 @@ abstract class UnaryArithmeticExpression extends Expression {
 	 * @throws ExpressionException
 	 * @return Object
 	 */
-	public abstract Object evalchar(Map m, char obj)
+	public abstract Object evalchar(Map<?, ?> m, char obj)
 		throws ExpressionException;
 	/**
 	 * Unary operation on a short.
@@ -87,7 +87,7 @@ abstract class UnaryArithmeticExpression extends Expression {
 	 * @throws ExpressionException
 	 * @return Object
 	 */
-	public abstract Object evalshort(Map m, short obj)
+	public abstract Object evalshort(Map<?, ?> m, short obj)
 		throws ExpressionException;
 	/**
 	 * Unary operation on an int.
@@ -95,7 +95,7 @@ abstract class UnaryArithmeticExpression extends Expression {
 	 * @throws ExpressionException
 	 * @return Object
 	 */
-	public abstract Object evalint(Map m, int obj)
+	public abstract Object evalint(Map<?, ?> m, int obj)
 		throws ExpressionException;
 	/**
 	 * Unary operation on a long.
@@ -103,7 +103,7 @@ abstract class UnaryArithmeticExpression extends Expression {
 	 * @throws ExpressionException
 	 * @return Object
 	 */
-	public abstract Object evallong(Map m, long obj)
+	public abstract Object evallong(Map<?, ?> m, long obj)
 		throws ExpressionException;
 	/**
 	 * Unary operation on a float.
@@ -111,7 +111,7 @@ abstract class UnaryArithmeticExpression extends Expression {
 	 * @throws ExpressionException
 	 * @return Object
 	 */
-	public abstract Object evalfloat(Map m, float obj)
+	public abstract Object evalfloat(Map<?, ?> m, float obj)
 		throws ExpressionException;
 	/**
 	 * Unary operation on a double.
@@ -119,6 +119,6 @@ abstract class UnaryArithmeticExpression extends Expression {
 	 * @throws ExpressionException
 	 * @return Object
 	 */
-	public abstract Object evaldouble(Map m, double obj)
+	public abstract Object evaldouble(Map<?, ?> m, double obj)
 		throws ExpressionException;
 }
