@@ -256,13 +256,25 @@ Since type checking does not exist during compile time, it may be necessary to
 validate an object type before accessing object attributes or making method calls.
 
 ? operator
-------------------
+----------
 The ternary ? operator evaluates two supplied expressions depending on the result of
 the evaluated condition, e.g.
 ```
     canvote = (age >= 18) ? \"Yes, you can vote!\" : \"No, you can't vote!\";
 ```
 The example results in a canvote value of "No, you can't vote!" if age is less than 18.
+
+Bitwise operators &, |, ^, ~
+----------------------------
+Bitwise operators & (AND), | (OR), ^ (XOR) and ~ (NOT or complement) can be used in 
+expressions. According to Java, they only apply to Byte, Character, Short, Integer and 
+Long types. Byte, Character and Short are up cast to Integer. e.g.
+```
+    i = 5 & 6;   // result is 4
+    i = 5 | 6;   // result is 7
+    i = 5 ^ 6;   // result is 3
+    i = ~6;      // result is -7
+```
 
 if statement
 ------------
@@ -424,7 +436,7 @@ Limitations
 - No casting
 - No variable declaration (not needed since new variables are created automatically)
 - No arrays
-- No bitwise or shift operators
+- No bitwise shift operators
 - No break or continue to a named label within while, do, and for loops. Normal break and continue statements in loops and conditional statements are allowed.</li>
 - No synchronize
 - No throwing or catching exceptions
