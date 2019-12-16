@@ -11,8 +11,8 @@ an object including a Boolean true or false result.
 
 Key features
 ------------
-- Implements most of the standard Java syntax
-- Implements the useful flow control statements (if, for, while, do, switch/case)
+- Implements the standard Java syntax for operators and flow control.
+- Implements the standard flow control statements (if, for, while, do, switch/case)
 - Performant expression parsing
 - Performant expression evaluation
 
@@ -356,8 +356,8 @@ When the termination expression evaluates to false, the loop ends.  E.g.
 ```
     {
         msg = "";
-            for (i=0, j=3; i<4; i++, j--) {
-                msg = msg + "hello " + i + j;
+        for (i=0, j=3; i<4; i++, j--) {
+            msg = msg + "hello " + i + j;
         }
     }
 ```
