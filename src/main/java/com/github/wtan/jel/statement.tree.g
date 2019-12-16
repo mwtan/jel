@@ -184,6 +184,42 @@ expr returns [Expression r = null]
             }
             r = new ModulusAssign(a, b);
         }
+    |   #(SR_ASSIGN a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new DivideAssign(a, b);
+        }
+    |   #(BSR_ASSIGN a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new DivideAssign(a, b);
+        }
+    |   #(SL_ASSIGN a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new DivideAssign(a, b);
+        }
+    |   #(BAND_ASSIGN a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseAndAssign(a, b);
+        }
+    |   #(BXOR_ASSIGN a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseXorAssign(a, b);
+        }
+    |   #(BOR_ASSIGN a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseOrAssign(a, b);
+        }
     |   #(LOR a = expr b = expr) {
             if (a==null || b==null) {
                 throw new RecognitionException(EXCEPTION_MSG);
