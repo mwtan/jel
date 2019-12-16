@@ -196,6 +196,24 @@ expr returns [Expression r = null]
             }
             r = new And(a, b);
         }
+    |   #(BOR a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseOr(a, b);
+        }
+    |   #(BXOR a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseXor(a, b);
+        }
+    |   #(BAND a = expr b = expr) {
+            if (a==null || b==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseAnd(a, b);
+        }
     |   #(NOT_EQUAL a = expr b = expr) {
             if (a==null || b==null) {
                 throw new RecognitionException(EXCEPTION_MSG);
@@ -285,6 +303,12 @@ expr returns [Expression r = null]
                 throw new RecognitionException(EXCEPTION_MSG);
             }
             r = new PostDec(a);
+        }
+    |   #(BNOT a = expr) {
+            if (a==null) {
+                throw new RecognitionException(EXCEPTION_MSG);
+            }
+            r = new BitwiseNot(a);
         }
     |   #(LNOT a = expr) {
             if (a==null) {

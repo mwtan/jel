@@ -201,12 +201,12 @@ assignmentExpression
             |   STAR_ASSIGN^
             |   DIV_ASSIGN^
             |   MOD_ASSIGN^
-//            |   SR_ASSIGN^
-//            |   BSR_ASSIGN^
-//            |   SL_ASSIGN^
-//            |   BAND_ASSIGN^
-//            |   BXOR_ASSIGN^
-//            |   BOR_ASSIGN^
+            |   SR_ASSIGN^
+            |   BSR_ASSIGN^
+            |   SL_ASSIGN^
+            |   BAND_ASSIGN^
+            |   BXOR_ASSIGN^
+            |   BOR_ASSIGN^
             )
             assignmentExpression
         )?
@@ -228,8 +228,26 @@ logicalOrExpression
 
 // logical and (&&)  (level 10)
 logicalAndExpression
-    :   equalityExpression (LAND^ equalityExpression)*
+    :   inclusiveOrExpression (LAND^ inclusiveOrExpression)*
     ;
+
+
+// bitwise or non-short-circuiting or (|)  (level 9)
+inclusiveOrExpression
+	:	exclusiveOrExpression (BOR^ exclusiveOrExpression)*
+	;
+
+
+// exclusive or (^)  (level 8)
+exclusiveOrExpression
+	:	andExpression (BXOR^ andExpression)*
+	;
+
+
+// bitwise or non-short-circuiting and (&)  (level 7)
+andExpression
+	:	equalityExpression (BAND^ equalityExpression)*
+	;
 
 
 // equality/inequality (==/!=) (level 6)
@@ -273,8 +291,8 @@ unaryExpression
     ;
 
 unaryExpressionNotPlusMinus
-//    :   BNOT^ unaryExpression
-    :   LNOT^ unaryExpression
+    :   BNOT^ unaryExpression
+    |   LNOT^ unaryExpression
     |   postfixExpression
     ;
 
@@ -393,7 +411,7 @@ COMMA           :   ','     ;
 ASSIGN          :   '='     ;
 EQUAL           :   "=="    ;
 LNOT            :   '!'     ;
-//BNOT            :   '~'     ;
+BNOT            :   '~'     ;
 NOT_EQUAL       :   "!="    ;
 DIV             :   '/'     ;
 DIV_ASSIGN      :   "/="    ;
@@ -407,18 +425,23 @@ STAR            :   '*'     ;
 STAR_ASSIGN     :   "*="    ;
 MOD             :   '%'     ;
 MOD_ASSIGN      :   "%="    ;
-//SR_ASSIGN       :   ">>="   ;
-//BSR_ASSIGN      :   ">>>="  ;
+SR				:	">>"	;
+SR_ASSIGN       :   ">>="   ;
+BSR				:	">>>"	;
+BSR_ASSIGN      :   ">>>="  ;
 GE              :   ">="    ;
 GT              :   ">"     ;
-//SL              :   "<<"    ;
-//SL_ASSIGN       :   "<<="   ;
+SL              :   "<<"    ;
+SL_ASSIGN       :   "<<="   ;
 LE              :   "<="    ;
 LT              :   '<'     ;
-//BXOR_ASSIGN     :   "^="    ;
-//BOR_ASSIGN      :   "|="    ;
+BXOR			:	'^'		;
+BXOR_ASSIGN     :   "^="    ;
+BOR				:	'|'		;
+BOR_ASSIGN      :   "|="    ;
 LOR             :   "||"    ;
-//BAND_ASSIGN     :   "&="    ;
+BAND			:	'&'		;
+BAND_ASSIGN     :   "&="    ;
 LAND            :   "&&"    ;
 SEMI            :   ';'     ;
 
