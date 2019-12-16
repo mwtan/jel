@@ -1,9 +1,5 @@
 package com.github.wtan.jel;
 
-import java.util.Map;
-
-import com.github.wtan.jel.exception.ExpressionException;
-
 /**
  * Base class for binary and unary expressions.
  *
@@ -38,9 +34,4 @@ abstract class MultiExpression extends Expression {
 		this.expr1 = ex1;
 		this.expr2 = ex2;
 	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public abstract Object eval(Map m) throws ExpressionException;
 }
