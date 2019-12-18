@@ -11,10 +11,18 @@ an object including a Boolean true or false result.
 
 Key features
 ------------
-- Implements the standard Java syntax for operators and flow control.
+- Implements the standard Java syntax for operators and flow control. Avoids the use of a
+  different code syntax.
 - Implements the standard flow control statements (if, for, while, do, switch/case)
+- Implements all the standard operators
 - Performant expression parsing
 - Performant expression evaluation
+
+Maven build
+-----------
+```
+mvn clean install
+```
 
 Usage in Java
 -------------
